@@ -6,7 +6,11 @@ from django.core.mail import send_mail, BadHeaderError
 
 
 def index(request):
-    person = Person.objects.get(pk=1)
+    try:
+        person = Person.objects.get(pk=1)
+    except:
+        return render(request, "error.html")
+
     profile = Profile.objects.get(person=person)
     skills  = Skills.objects.filter(person=person)
     experience = Experience.objects.filter(person=person)
