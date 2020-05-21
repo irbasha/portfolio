@@ -11,6 +11,10 @@ class Person(models.Model):
     linkedin = models.CharField(max_length=100)
     instagram = models.CharField(max_length=100)
     twitter = models.CharField(max_length=100)
+    address1 = models.CharField(max_length=200, null=True)
+    address2 = models.CharField(max_length=200, null=True)
+    address3 = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=200, null=True)
 
     class Meta:
         verbose_name_plural = 'Person'
