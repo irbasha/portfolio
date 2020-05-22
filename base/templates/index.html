@@ -1,16 +1,11 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<!-- header 
-   ================================================== -->
 <header>
     <div class="row">
-
         <div class="top-bar">
             <a class="menu-toggle" href="#"><span>Menu</span></a>
-
             <div class="logo">
-                <a href="{% url 'core:index' %}">I</a>
+                <a href="{% url 'core:index' %}">KARDS</a>
             </div>
-
             <nav id="main-nav-wrap">
                 <ul class="main-navigation">
                     <li class="current"><a class="smoothscroll" href="#intro" title="">Home</a></li>
@@ -22,163 +17,97 @@
                 </ul>
             </nav>
         </div>
-        <!-- /top-bar -->
-
     </div>
-    <!-- /row -->
 </header>
-<!-- /header -->
 
-<!-- intro section
-   ================================================== -->
 <section id="intro">
-
     <div class="intro-overlay"></div>
-
     <div class="intro-content">
         <div class="row">
-
             <div class="col-twelve">
-
                 <h5>Hello, World.</h5>
-                <h1>I'm {{ person.name }}</h1>
-
+                <h1>I'm {{ profile.person.first_name }}</h1>
                 <p class="intro-position">
-                    <span>{{ person.role }}</span>
+                    <span>{{ profile.job_role }}</span>
                 </p>
-
                 <a class="button stroke smoothscroll" href="#about" title="">More About Me</a>
-
             </div>
-
         </div>
     </div>
-    <!-- /intro-content -->
-
     <ul class="intro-social">
-        <li><a href="{{person.facebook}}"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="{{person.twitter}}"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="{{person.linkedin}}"><i class="fa fa-linkedin"></i></a></li>
-        <li><a href="{{person.instagram}}"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="{{contact.facebook}}"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="{{contact.twitter}}"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="{{contact.linkedin}}"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="{{contact.instagram}}"><i class="fa fa-instagram"></i></a></li>
     </ul>
-    <!-- /intro-social -->
-
 </section>
-<!-- /intro -->
 
 
-<!-- about section
-   ================================================== -->
 <section id="about">
-
     <div class="row section-intro">
         <div class="col-twelve">
-
             <h5>About</h5>
             <h1>Let me introduce myself.</h1>
-
             <div class="intro-info">
-
-                <img src="{{person.profile_image.url}}" alt="{{person.profile_image.url}}">
-
+                <img src="{{profile.profile_picture.url}}" alt="profile_picture">
                 <p class="lead">
-                    {{ person.bio }}
+                    {{ profile.profile_bio }}
                 </p>
             </div>
-
         </div>
     </div>
     <!-- /section-intro -->
 
     <div class="row about-content">
-
-        <div class="col-six tab-full">
-
+        <div class="col-twelve tab-full">
             <h3>Profile</h3>
-            <!-- <p>Lorem ipsum Qui veniam ut consequat ex ullamco nulla in non ut esse in magna sint minim officia consectetur nisi commodo ea magna pariatur nisi cillum.</p> -->
-
             <ul class="info-list">
                 <li>
                     <strong>Fullname:</strong>
-                    <span>{{ person.name }}</span>
+                    <span>{{ profile.person.full_name }}</span>
                 </li>
                 <li>
                     <strong>Birth Date:</strong>
-                    <span>{{ profile.dob }}</span>
+                    <span>{{ profile.date_of_birth }}</span>
                 </li>
                 <li>
                     <strong>Job:</strong>
-                    <span>{{ profile.designation }}</span>
+                    <span>{{ profile.current_designation }}</span>
                 </li>
-                <!-- <li>
-                        <strong>Website:</strong>
-                        <span>N/A</span>
-                    </li> -->
-                <li>
-                    <strong>Email:</strong>
-                    <span>{{ profile.email }}</span>
-                </li>
-
             </ul>
-            <!-- /info-list -->
-
         </div>
-
-        <div class="col-six tab-full">
-
+        <div class="col-twelve tab-full">
             <h3>Skills</h3>
-            <!-- <p>Lorem ipsum Qui veniam ut consequat ex ullamco nulla in non ut esse in magna sint minim officia consectetur nisi commodo ea magna pariatur nisi cillum.</p> -->
-
             <ul class="skill-bars">
                 {% for skill in skills %}
                 <li>
-                    <div class="progress percent{{skill.rating}}"><span>{{skill.rating}}%</span></div>
-                    <strong>{{skill.name}}</strong>
+                    <div class="progress percent{{skill.skill_rating}}"><span>{{skill.skill_rating}}%</span></div>
+                    <strong>{{skill.skill_name}}</strong>
                 </li>
                 {% endfor %}
             </ul>
-            <!-- /skill-bars -->
         </div>
     </div>
-
     <div class="row button-section">
         <div class="col-twelve">
             <a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
-            <a href="{{person.resume.url}}" title="Download CV" class="button button-primary">Download CV</a>
+            <a href="{{profile.resume.url}}" title="Download CV" class="button button-primary">Download CV</a>
         </div>
     </div>
-
 </section>
-<!-- /process-->
 
-
-<!-- resume Section
-   ================================================== -->
 <section id="resume" class="grey-section">
-
     <div class="row section-intro">
         <div class="col-twelve">
-
             <h5>Resume</h5>
             <h1>More of my credentials.</h1>
-
-            <!-- <p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p> -->
-
         </div>
     </div>
-    <!-- /section-intro-->
-
     <div class="row resume-timeline">
-
         <div class="col-twelve resume-header">
-
             <h2>Work Experience</h2>
-
         </div>
-        <!-- /resume-header -->
-
         <div class="col-twelve">
-
             <div class="timeline-wrap">
                 {% for exp in experience %}
                 <div class="timeline-block">
@@ -187,7 +116,7 @@
                     </div>
                     <div class="timeline-header">
                         <h3>{{exp.designation}}</h3>
-                        <p>{{exp.from_date}}-{{exp.to_date}}</p>
+                        <p>{{exp.get_start_date}} - {{exp.get_end_date}}</p>
                     </div>
                     <div class="timeline-content">
                         <h4>{{exp.company}}</h4>
@@ -196,83 +125,46 @@
                 </div>
                 {% endfor %}
             </div>
-            <!-- /timeline-wrap -->
-
         </div>
-        <!-- /col-twelve -->
-
     </div>
-    <!-- /resume-timeline -->
 
     <div class="row resume-timeline">
-
         <div class="col-twelve resume-header">
-
             <h2>Education</h2>
-
         </div>
-        <!-- /resume-header -->
-
         <div class="col-twelve">
-
             <div class="timeline-wrap">
                 {% for edu in education %}
                 <div class="timeline-block">
-
                     <div class="timeline-ico">
                         <i class="fa fa-briefcase"></i>
                     </div>
-
                     <div class="timeline-header">
                         <h3>{{edu.degree}}</h3>
-                        <p>{{edu.from_date}} - {{edu.to_date}}</p>
+                        <h5>{{edu.field_of_study}}</h5>
+                        <p>{{exp.get_start_date}} - {{exp.get_end_date}}</p>
                     </div>
-
                     <div class="timeline-content">
                         <h4>{{edu.university}}</h4>
                         <p>{{edu.description}}</p>
                     </div>
-
                 </div>
-                <!-- /timeline-block -->
                 {% endfor %}
-
             </div>
-            <!-- /timeline-wrap -->
-
         </div>
-        <!-- /col-twelve -->
-
     </div>
-    <!-- /resume-timeline -->
-
 </section>
-<!-- /features -->
 
-
-<!-- Portfolio Section
-   ================================================== -->
 <section id="portfolio">
-
     <div class="row section-intro">
         <div class="col-twelve">
-
             <h5>Portfolio</h5>
             <h1>Check Out Some of My Works.</h1>
-
-            <p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>
-
         </div>
     </div>
-    <!-- /section-intro-->
-
     <div class="row portfolio-content">
-
         <div class="col-twelve">
-
-            <!-- portfolio-wrapper -->
             <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
-
                 {% for project in projects %}
                 <div class="bgrid folio-item">
                     <div class="item-wrap">
@@ -291,11 +183,10 @@
                 </div>
                 {% endfor %}
 
-                <!-- end -->
+                <!-- break -->
 
                 {% for project in projects %}
                 <div id="modal-{{project.id}}" class="popup-modal slider mfp-hide">
-
                     <div class="media">
                         <img src="{{project.image.url}}" alt="" />
                     </div>
@@ -304,120 +195,68 @@
                         <p>{{project.description}}</p>
                         <div class="categories">{{project.projecttype}}</div>
                     </div>
-
                     <div class="link-box">
-                        <!-- <a href="{% url 'core:detail' project.pk %}">Details</a> -->
                         <a href="#" class="popup-modal-dismiss">Close</a>
                     </div>
-
                 </div>
-                <!-- /modal-01 -->
                 {% endfor %}
-
             </div>
-            <!-- /portfolio-wrapper -->
-
         </div>
-        <!-- /twelve -->
-
     </div>
-    <!-- /portfolio-content -->
-
 </section>
-<!-- /portfolio -->
 
-<!-- stats Section
-   ================================================== -->
 <section id="stats" class="count-up">
-
     <div class="row">
         <div class="col-twelve">
-
             <div class="block-1-3 block-s-1-3 block-tab-1-2 block-mob-full stats-list">
-
                 <div class="bgrid stat">
-
                     <div class="icon-part">
                         <i class="icon-pencil-ruler"></i>
                     </div>
-
                     <h3 class="stat-count">
                         10
                     </h3>
-
                     <h5 class="stat-title">
                         Projects Completed
                     </h5>
-
                 </div>
-                <!-- /stat -->
-
                 <div class="bgrid stat">
-
                     <div class="icon-part">
                         <i class="icon-clock"></i>
                     </div>
-
                     <h3 class="stat-count">
                         7200
                     </h3>
-
                     <h5 class="stat-title">
                         Hours
                     </h5>
-
                 </div>
-                <!-- /stat -->
-
                 <div class="bgrid stat">
-
                     <div class="icon-part">
                         <i class="icon-cup"></i>
                     </div>
-
                     <h3 class="stat-count">
                         1500
                     </h3>
-
                     <h5 class="stat-title">
                         Coffee Cups
                     </h5>
-
                 </div>
-                <!-- /stat -->
-
             </div>
-            <!-- /stats-list -->
-
         </div>
-        <!-- /twelve -->
     </div>
-    <!-- /row -->
-
 </section>
-<!-- /stats -->
 
-<!-- contact
-   ================================================== -->
 <section id="contact">
-
     <div class="row section-intro">
         <div class="col-twelve">
-
             <h5>Contact</h5>
             <h1>I'd Love To Hear From You.</h1>
-
             <p class="lead"></p>
-
         </div>
     </div>
-    <!-- /section-intro -->
-
     <div class="row contact-form">
-
         <div class="col-twelve">
-
-            <!-- form -->
             <form name="contactForm" id="contactForm" method="post" action="/contact/">
                 {% csrf_token %}
                 <fieldset>
@@ -437,67 +276,39 @@
                             </div>
                         </div>
                     </div>
-
                 </fieldset>
             </form>
-            <!-- Form End -->
-
-            <!-- contact-warning -->
             <div id="message-warning">
             </div>
-            <!-- contact-success -->
             <div id="message-success">
                 <i class="fa fa-check"></i>Your message was sent, thank you!<br>
             </div>
-
         </div>
-        <!-- /col-twelve -->
-
     </div>
-    <!-- /contact-form -->
 
     <div class="row contact-info">
-
         <div class="col-four tab-full">
-
             <div class="icon">
                 <i class="icon-pin"></i>
             </div>
-
             <h5>Where to find me</h5>
-
-            <p>{{person.address1}}<br>{{person.address2}}<br>{{person.address3}}</p>
-
+            <p>{{contact.address1}}<br>{{contact.address2}}<br>{{contact.address3}}</p>
         </div>
-
         <div class="col-four tab-full collapse">
-
             <div class="icon">
                 <i class="icon-mail"></i>
             </div>
-
             <h5>Email Me At</h5>
-
-            <p>{{profile.email}}</p>
-
+            <p>{{contact.email}}</p>
         </div>
-
         <div class="col-four tab-full">
-
             <div class="icon">
                 <i class="icon-phone"></i>
             </div>
-
             <h5>Call Me At</h5>
-
-            <p>Phone: {{person.phone}}</p>
-
+            <p>Mobile: {{contact.mobile}}</p>
         </div>
-
     </div>
-    <!-- /contact-info -->
-
 </section>
-<!-- /contact -->
 
 {% endblock content %}

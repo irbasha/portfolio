@@ -1,31 +1,56 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from core.models import Person, Profile, Skills, Experience, Education, Projects
+from core.models import Person, Profile, Contact, Skills, Experience, Education, Projects
 from core.forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 
 
 def index(request):
+    context = {}
+
+    form = ContactForm()
+    context.update({'form': form})
+
     try:
         person = Person.objects.get(pk=1)
     except:
         return render(request, "error.html")
 
-    profile = Profile.objects.get(person=person)
-    skills  = Skills.objects.filter(person=person)
-    experience = Experience.objects.filter(person=person)
-    education = Education.objects.filter(person=person)
-    projects = Projects.objects.filter(person=person)
+    try:
+        profile = Profile.objects.get(person=person)
+        context.update({'profile': profile})
+    except:
+        return render(request, "index.html", context)
 
-    context = {
-        'person': person,
-        'profile': profile,
-        'skills': skills,
-        'experience': experience,
-        'education': education,
-        'projects': projects,
-        'form': ContactForm()
-    }
+    try:
+        contact = Contact.objects.get(person=person)
+        context.update({'contact': contact})
+    except:
+        return render(request, "index.html", context)
+
+    try:
+        skills = Skills.objects.filter(person=person)
+        context.update({'skills': skills})
+    except:
+        return render(request, "index.html", context)
+
+    try:
+        experience = Experience.objects.filter(person=person)
+        context.update({'experience': experience})
+    except:
+        return render(request, "index.html", context)
+
+    try:
+        education = Education.objects.filter(person=person)
+        context.update({'education': education})
+    except:
+        return render(request, "index.html", context)
+
+    try:
+        projects = Projects.objects.filter(person=person)
+        context.update({'projects': projects})
+    except:
+        return render(request, "index.html", context)
 
     return render(request, "index.html", context)
 

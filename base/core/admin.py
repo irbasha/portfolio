@@ -1,9 +1,13 @@
 from django.contrib import admin
-from core.models import Person, Profile, Skills, Experience, Education, Projects
+from core.models import Person, Profile, Contact, Skills, Experience, Education, Projects
 
 
 class ProfileInline(admin.StackedInline):
     model = Profile
+    extra = 0
+
+class ContactInline(admin.StackedInline):
+    model = Contact
     extra = 0
 
 class SkillsInline(admin.StackedInline):
@@ -23,6 +27,6 @@ class ProjectInline(admin.StackedInline):
     extra = 0
 
 class PersonAdmin(admin.ModelAdmin):
-    inlines = [ProfileInline, SkillsInline, ExperienceInline, EducationInline, ProjectInline]
+    inlines = [ProfileInline, ContactInline, SkillsInline, ExperienceInline, EducationInline, ProjectInline]
 
 admin.site.register(Person, PersonAdmin)
