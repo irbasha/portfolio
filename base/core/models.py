@@ -77,7 +77,7 @@ class Experience(models.Model):
     def get_end_date(self):
         if self.currently_working_here:
             return "Present"
-        return self.from_date.strftime("%m %Y")
+        return self.to_date.strftime("%m %Y")
 
 
 class Education(models.Model):
@@ -102,7 +102,7 @@ class Education(models.Model):
     def get_end_date(self):
         if self.currently_studing_here:
             return "Present"
-        return self.from_date.strftime("%m %Y")
+        return self.to_date.strftime("%m %Y")
 
 class Projects(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
